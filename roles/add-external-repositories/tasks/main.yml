@@ -1,0 +1,17 @@
+---
+- name: Add VSCodium GPG key
+  shell: wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+
+- name: Add VSCodium repository
+  become: yes
+  shell: echo 'deb [signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' | tee /etc/apt/sources.list.d/vscodium.list
+
+# [RASPBIAN]
+# - name: Add Moonlight repository
+#   become: yes
+#   shell: curl -1sLf 'https://dl.cloudsmith.io/public/moonlight-game-streaming/moonlight-qt/setup.deb.sh' | distro=raspbian codename=buster sudo -E bash
+
+- name: Update system
+  become: yes
+  apt:
+    update_cache: yes

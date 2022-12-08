@@ -1,0 +1,36 @@
+---
+- name: Install Moonlight
+  become: yes
+  apt:
+    name: moonlight-qt
+
+- name: '[WARNING] REQUIRES REBOOT: Change display driver to support H.264 decoder required by Moonlight'
+  become: yes
+  lineinfile:
+    path: /boot/config.txt
+    line: dtoverlay=vc4-fkms-v3d
+    regexp: dtoverlay=vc4-kms-v3d
+
+- name: '[WARNING] REQUIRES REBOOT: Increase GPU memory required by Moonlight'
+  become: yes
+  lineinfile:
+    path: /boot/config.txt
+    line: gpu_mem=128
+
+# The default is ( tested in RPi 3b debian 11 Bulleye ):
+# dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 cgroup_enable=memory elevator=deadline rootwait
+
+# usbhid.mousepoll options are:
+# - 0: the mouse decides the polling rate.
+# - 1: 1000Hz
+# - 2: 500Hz
+# - 4: 250Hz
+# - 8: 125Hz
+# - 10: 100Hz ( default by the system )
+- name: '[WARNING] REQUIRES REBOOT: Change mouse polling to avoid slowly mouse issues'
+  become: yes
+  lineinfile:
+    path: /boot/cmdline.txt
+    backrefs: yes
+    regexp: '(^((?!usbhid\.mousepoll).)*$)' # Match if the line does not contain usbhid.mousepoll.
+    line: '\1 usbhid.mousepoll=0' # In case of match, replace the line by the same line + usbhid.mousepoll=0 at the end.

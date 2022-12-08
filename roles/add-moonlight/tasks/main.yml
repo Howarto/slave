@@ -1,0 +1,5 @@
+---
+- name: Install Moonlight
+  become: yes
+  community.general.snap:
+    name: moonlight

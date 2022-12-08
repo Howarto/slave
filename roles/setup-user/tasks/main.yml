@@ -1,0 +1,16 @@
+---
+- name: Check that local id_rsa.pub exists
+  stat:
+    path: ~/.ssh/id_rsa.pub
+  register: id_rsa_pub
+
+- name: Allow local ssh public key to connect
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user_id }}"
+    key: "{{ lookup( 'file', '~/.ssh/id_rsa.pub' ) }}"
+  when: id_rsa_pub.stat.exists
+
+- name: Set profile image
+  copy:
+    src: ./files/home/.face.icon
+    dest: ~/

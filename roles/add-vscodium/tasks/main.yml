@@ -1,0 +1,5 @@
+---
+- name: Install VSCodium
+  become: yes
+  apt:
+    name: codium

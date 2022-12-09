@@ -5,11 +5,11 @@
   roles:
     # - role: add-hosts
     # - role: add-external-repositories
-    - role: setup-user
+    # - role: setup-user
     # - role: add-vim
     # - role: add-vscodium
     # - role: add-moonlight
-    # - role: add-desktop-environment
+    - role: add-desktop-environment
   # post_tasks:
   #   - name: Reboot to apply system changes
   #     become: yes

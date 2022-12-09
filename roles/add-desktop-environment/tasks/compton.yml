@@ -1,0 +1,38 @@
+---
+# [Effects]
+- name: Install Compton ( X Compositor )
+  become: yes
+  apt:
+    name: compton
+
+- name: Install Compton configurator
+  become: yes
+  apt:
+    name: compton-conf
+
+- name: Create autostart folder
+  file:
+    path: ~/.config/autostart
+    state: directory
+
+- name: Enable Compton
+  copy:
+    dest: ~/.config/autostart/lxqt-compton.desktop
+    content: |
+      [Desktop Entry]
+      Comment=A X compositor
+      Exec=compton --dbus
+      GenericName=X compositor
+      Name=Compton (X Compositor)
+      OnlyShowIn=LXQt;
+      TryExec=compton
+      Type=Application
+      X-LXQt-Module=true
+
+- name: Set Compton configuration
+  copy:
+    dest: ~/.config/compton.conf
+    content: |
+      menu-opacity=0.95
+      frame-opacity=1.0
+#

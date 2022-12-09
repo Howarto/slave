@@ -1,0 +1,49 @@
+---
+# [DisplayManager]
+- name: Install SSDM ( Simple Desktop Display Manager )
+  become: yes
+  apt:
+    name: sddm
+
+- name: Set SSDM as default Display Manager
+  become: yes
+  copy:
+    dest: /etc/X11/default-display-manager
+    content: /usr/bin/ssdm
+
+- name: Capture files different of lxqt.desktop
+  find:
+    paths: /usr/share/xsessions
+    file_type: file
+    excludes:
+      - lxqt.desktop
+  register: found_files
+
+- name: Set LXQT as the only selectable desktop environment deleting the other options
+  become: yes
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ found_files['files'] }}"
+
+- name: Put WhiteSur theme
+  become: yes
+  unarchive:
+    src: ./files/sddm/themes/WhiteSur.tar.gz
+    dest: /usr/share/sddm/themes
+
+- name: Install theme dependencies
+  become: yes
+  apt:
+    name:
+      - qml-module-qtquick-controls
+      - qml-module-qtquick-controls2
+
+- name: Set WhiteSur theme as default
+  become: yes
+  copy:
+    dest: /etc/sddm.conf
+    content: |
+      [Theme]
+      Current=WhiteSur
+#

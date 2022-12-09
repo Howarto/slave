@@ -1,0 +1,26 @@
+---
+# [Conflictive packages]
+- name: Uninstall XFWM4
+  become: yes
+  apt:
+    name: xfwm4
+    state: absent
+#
+
+# [WindowManager]
+- name: Install Openbox ( Window Manager )
+  become: yes
+  apt:
+    name: openbox
+
+- name: Create config directory
+  file:
+    path: ~/.config/openbox
+    state: directory
+
+- name: Create Openbox initial config file
+  copy:
+    src: /etc/xdg/openbox/lxqt-rc.xml
+    dest: ~/.config/openbox
+    remote_src: yes
+#

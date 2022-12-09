@@ -14,3 +14,10 @@
   copy:
     src: ./files/home/.face.icon
     dest: ~/
+
+- name: Set useful aliases
+  copy:
+    dest: ~/.bash_aliases
+    content: |
+      alias tar='f(){ tar czvf $1.tar.gz $1 1>/dev/null; echo $1.tar.gz; unset -f f; }; f'
+      alias untar="tar xzvf"

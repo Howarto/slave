@@ -19,5 +19,7 @@
   copy:
     dest: ~/.bash_aliases
     content: |
+      alias ls="ls -A --color=auto"
+      alias ll="ls -l"
       alias tar='f(){ tar czvf $1.tar.gz $1 1>/dev/null; echo $1.tar.gz; unset -f f; }; f'
       alias untar="tar xzvf"

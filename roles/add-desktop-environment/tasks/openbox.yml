@@ -13,3 +13,9 @@
   apt:
     name: openbox
 #
+
+# [Keyboard shortcuts for window snapping]
+- name: Create Openbox config directory
+  file:
+    path: ~/.config/openbox
+    state: directory

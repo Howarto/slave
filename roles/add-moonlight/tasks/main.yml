@@ -1,4 +1,14 @@
 ---
+- name: Install Snap
+  become: yes
+  apt:
+    name: snapd
+
+- name: Update Snap
+  become: yes
+  community.general.snap:
+    name: core
+
 - name: Install Moonlight
   become: yes
   community.general.snap:

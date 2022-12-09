@@ -44,11 +44,6 @@
     src: ./files/lxqt/.themes/WhiteSur.tar.gz
     dest: ~/.themes
 
-- name: Create Openbox config directory
-  file:
-    path: ~/.config/openbox
-    state: directory
-
 - name: Create LXQT initial config file for Openbox
   copy:
     src: /etc/xdg/openbox/lxqt-rc.xml
@@ -152,4 +147,91 @@
   template:
     src: "./files/lxqt/panel.conf.j2"
     dest: ~/.config/lxqt/panel.conf
+#
+
+# [Shortcuts]
+# Copied from https://pastebin.com/NBkccE7B .
+- name: Set keyboard shortcuts for window snapping
+  blockinfile:
+    path: ~/.config/openbox/lxqt-rc.xml
+    insertbefore: </keyboard>
+    content: |
+      <keybind key="A-a">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>100%</height>
+          <x>0%</x>
+          <y>0%</y>
+        </action>
+      </keybind>
+      <keybind key="A-d">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>100%</height>
+          <x>50%</x>
+          <y>0%</y>
+        </action>
+      </keybind>
+      <keybind key="A-x">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>100%</width>
+          <height>50%</height>
+          <x>0%</x>
+          <y>50%</y>
+        </action>
+      </keybind>
+      <keybind key="A-w">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>100%</width>
+          <height>50%</height>
+          <x>0%</x>
+          <y>0%</y>
+        </action>
+      </keybind>
+      <keybind key="A-q">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>50%</height>
+          <x>0%</x>
+          <y>0%</y>
+        </action>
+      </keybind>
+      <keybind key="A-e">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>50%</height>
+          <x>50%</x>
+          <y>0%</y>
+        </action>
+      </keybind>
+      <keybind key="A-z">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>50%</height>
+          <x>0%</x>
+          <y>50%</y>
+        </action>
+      </keybind>
+      <keybind key="A-c">
+        <action name="UnmaximizeFull"/>
+        <action name="MoveResizeTo">
+          <width>50%</width>
+          <height>50%</height>
+          <x>50%</x>
+          <y>50%</y>
+        </action>
+      </keybind>
+      <keybind key="A-s">
+        <action name="Maximize"/>
+      </keybind>
+      <keybind key="A-S-s">
+        <action name="Iconify"/>
+      </keybind>
 #

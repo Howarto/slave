@@ -44,6 +44,17 @@
     src: ./files/lxqt/.themes/WhiteSur.tar.gz
     dest: ~/.themes
 
+- name: Create Openbox config directory
+  file:
+    path: ~/.config/openbox
+    state: directory
+
+- name: Create LXQT initial config file for Openbox
+  copy:
+    src: /etc/xdg/openbox/lxqt-rc.xml
+    dest: ~/.config/openbox
+    remote_src: yes
+
 - name: Set WhiteSur theme as default
   lineinfile:
     path: ~/.config/openbox/lxqt-rc.xml

@@ -1,0 +1,17 @@
+---
+- name: Install Podman
+  become: yes
+  apt:
+    name: podman
+
+- name: Install dbus-user-session to run podman in rootless mode
+  become: yes
+  apt:
+    name: dbus-user-session
+
+- name: Start dbus service
+  systemd:
+    name: dbus
+    state: started
+    scope: user
+    enabled: true

@@ -1,0 +1,27 @@
+---
+- name: Create Neovim source directory
+  become: yes
+  file:
+    path: /usr/local/src/nvim
+    state: directory
+
+- name: Copy Containerfile and resources
+  become: yes
+  copy:
+    src: ./files/nvim/
+    dest: /usr/local/src/nvim
+
+- name: Build podman image
+  containers.podman.podman_image:
+    name: nvim
+    path: /usr/local/src/nvim
+
+- name: Create Neovim local directory
+  file:
+    path: ~/.local/share/nvim
+    state: directory
+
+- name: Add an alias to call Neovim container as command
+  lineinfile:
+    path: ~/.bash_aliases
+    line: alias nvim='f(){ WORKSPACE_DIR="${1:-.}"; podman run -it -v $( realpath $WORKSPACE_DIR):/root/workspace -v $( realpath ~/.local/share/nvim ):/root/.local/share/nvim nvim; unset -f f; }; f'

@@ -1,0 +1,23 @@
+FROM alpine:edge
+
+WORKDIR /root
+
+# Copy entrypoint and make it executable.
+COPY ./entrypoint.sh .
+RUN ["chmod", "+x", "./entrypoint.sh"]
+
+# Install essentials.
+RUN apk add alpine-sdk
+
+# Install Git.
+RUN apk add git lazygit
+
+# Install Neovim.
+RUN apk add neovim ripgrep
+
+# Get Neovim configuration.
+# One as a default config and its backup to use in case of mount as volume.
+RUN git clone https://github.com/LazyVim/starter ~/.config/nvim.bk
+RUN cp --recursive ~/.config/nvim.bk ~/.config/nvim
+
+ENTRYPOINT ["./entrypoint.sh"]

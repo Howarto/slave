@@ -3,3 +3,27 @@
   become: yes
   apt:
     name: codium
+
+- name: Add custom settings
+  copy:
+    dest: ~/.config/VSCodium/User/keybindings.json
+    content: |
+      {}
+
+- name: Add custom keybindings
+  copy:
+    dest: ~/.config/VSCodium/User/keybindings.json
+    content: |
+      []
+
+- name: Add custom extensions
+  shell: "codium --install-extension {{ item }}"
+  loop:
+    - bpruitt-goddard.mermaid-markdown-syntax-highlighting
+    - dbaeumer.vscode-eslint
+    - DotJoshJohnson.xml
+    - eamodio.gitlens
+    - moalamri.inline-fold
+    - ms-vscode.sublime-keybindings
+    - wayou.vscode-todo-highlight
+    - wix.vscode-import-cost

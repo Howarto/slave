@@ -4,6 +4,11 @@
   apt:
     name: codium
 
+- name: Create User directory
+  file:
+    name: ~/.config/VSCodium/User
+    state: directory
+
 - name: Add custom settings
   copy:
     dest: ~/.config/VSCodium/User/keybindings.json

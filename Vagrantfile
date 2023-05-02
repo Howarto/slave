@@ -16,7 +16,7 @@ Vagrant.configure( '2' ) do | config |
   config.vm.synced_folder '.', '/vagrant'
 
   # (WARNING: can cause collisions with others) Static IP.
-  # config.vm.network 'private_network', ip: '192.168.10.10'
+  config.vm.network 'private_network', ip: '192.168.10.10'
 
   # Allow using local public key for SSH connection.
   # ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip

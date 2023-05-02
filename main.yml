@@ -5,14 +5,14 @@
   roles:
     - role: add-hosts
     - role: add-external-repositories
-    - role: add-pip
+    - role: add-pip # TODO: Remove when add-podman role does not use it.
     - role: add-user
     - role: add-podman
     - role: add-nvim
     - role: add-vscodium
     - role: add-moonlight
     - role: add-desktop-environment
-  # post_tasks:
+  # post_tasks: # Uncomment line when ansible is executed remotelly.
   #   - name: Reboot to apply system changes
   #     become: yes
   #     reboot:

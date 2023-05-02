@@ -19,6 +19,7 @@
 
 # Use v<1.0 because Debian11 uses podman 3.0.1 and
 # podman-compose requires podman 3.1 as a minimum.
+# TODO: Change for apt when they release a stable version.
 - name: Add podman-compose
   pip:
     name: podman-compose<1.0

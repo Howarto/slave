@@ -5,6 +5,7 @@
     name: podman
 
 - name: Add registries
+  become: yes
   copy:
     dest: /etc/containers/registries.conf
     content: |

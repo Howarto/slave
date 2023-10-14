@@ -10,6 +10,7 @@
     - role: add-podman
     - role: add-nvim
     - role: add-vscodium
+    - role: add-bun
     - role: add-moonlight
     - role: add-desktop-environment
   # post_tasks: # Uncomment line when ansible is executed remotelly.

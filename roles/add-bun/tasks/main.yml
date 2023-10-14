@@ -1,0 +1,13 @@
+---
+- name: Install unzip ( Is a Dependency )
+  become: yes
+  apt:
+    name: unzip
+
+- name: '[WARNING] WITHOUT SUDO: Uninstall Bun'
+  file:
+    path: ~/.bun
+    state: absent
+
+- name: '[WARNING] WITHOUT SUDO: Install Bun'
+  shell: curl -fsSL https://bun.sh/install | bash

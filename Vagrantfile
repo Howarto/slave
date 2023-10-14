@@ -2,7 +2,7 @@ Vagrant.configure( '2' ) do | config |
   config.vagrant.plugins = [ 'vagrant-vbguest', 'vagrant-hostmanager' ]
 
   config.vm.provider 'virtualbox' do | vb |
-      vb.memory = '4096'
+      vb.memory = '8192'
   end
 
   # Guest tools.
